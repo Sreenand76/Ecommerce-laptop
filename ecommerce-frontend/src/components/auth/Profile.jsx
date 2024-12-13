@@ -154,8 +154,7 @@ const Profile = () => {
             ) : (
             
                 <p className="text-lg text-white break-words">{userDetails.email}</p>
-              </div>
-
+             
             )}
           </div>
 
