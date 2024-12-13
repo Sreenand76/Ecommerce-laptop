@@ -7,6 +7,11 @@ body{
 
   color: rgb(201, 201, 201);
 }
+
+* {
+  font-family: 'Poppins', Arial, sans-serif;
+}
+
 html {
   scroll-behavior: smooth;
 }
