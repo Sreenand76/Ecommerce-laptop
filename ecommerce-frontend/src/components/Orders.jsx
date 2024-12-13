@@ -122,7 +122,7 @@ const Orders = () => {
               <div className="col-span-2 md:col-span-1 flex md:flex-col space-x-4 sm:space-x-0 sm:space-y-2 justify-center mt-4 sm:mt-0 md:px-10 gap-1">
 
                 <button
-                  className="bg-red-800 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors text-xs"
+                  className="bg-red-800 text-white px-3 py-2 rounded-lg hover:bg-red-600 transition-colors text-xs"
                   onClick={() => handleCancelOrder(order.id)}
                 >
                   Cancel Order
