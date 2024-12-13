@@ -153,7 +153,7 @@ const Cart = () => {
                       Remove
                     </button>
                     <button
-                      className="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors text-sm"
+                      className="bg-blue-700 text-white px-3 py-2 rounded-lg hover:bg-blue-800 transition-colors text-sm"
                       onClick={() => proceedToCheckOut(item)}
                     >
                       Order Now
