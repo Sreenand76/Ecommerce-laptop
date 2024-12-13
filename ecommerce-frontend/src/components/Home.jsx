@@ -91,7 +91,7 @@ const LandingPage = () => {
             <h1 className="text-[40px] md:text-6xl lg:text-7xl font-extrabold leading-tight ">
               Find Your Perfect Laptop
             </h1>
-            <p className="mt-6 text-xl font-light">
+            <p className="mt-6 text-xl font-thin text-gray-300">
               Discover the best laptops for gaming, work, and creativity.
               Built for performance, tailored for you.
             </p>
@@ -200,10 +200,10 @@ const LandingPage = () => {
 
 
       {/* Call-to-Action Section */}
-      <section className="bg-black text-gray-100 py-16">
+      <section className="bg-black text-gray-100 py-16 px-2 md:px-0">
         <div className="container mx-auto text-center">
-          <h2 className="text-4xl font-bold">Stay Updated with the Latest Deals</h2>
-          <p className="mt-4 text-lg">
+          <h2 className="text-3xl md:text-4xl font-bold">Stay Updated with the Latest Deals</h2>
+          <p className="mt-4 text-base text-gray-300">
             Subscribe to get access to exclusive discounts and offers.
           </p>
           <form className="mt-6 flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
