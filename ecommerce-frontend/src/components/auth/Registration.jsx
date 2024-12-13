@@ -33,7 +33,12 @@ const Registration = () => {
         address: "",
         phone: "",
       });
-      toast.success("Registration successful");
+      toast.success(`Registration successfull`,
+        {
+          position: "top-right",
+          autoClose: 2000,
+          theme: "dark",
+        })
       navigate("/login");
     } catch (error) {
       setSuccessMessage("");
