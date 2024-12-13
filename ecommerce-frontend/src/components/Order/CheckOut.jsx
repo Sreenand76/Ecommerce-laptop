@@ -87,7 +87,7 @@ const Checkout = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="w-full max-w-md bg-gray-800 rounded-lg shadow-lg px-5 md:px-8 py-7 mx-4 mt-12 border border-gray-600 ">
+      <div className="w-full max-w-md bg-gray-800 rounded-lg shadow-lg px-7 md:px-8 py-7 mx-4 mt-12 border border-gray-600 ">
         {errorMessage && (
           <div className="bg-red-600 text-white px-4 py-3 rounded-lg mb-4 text-sm">
             {errorMessage}
