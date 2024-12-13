@@ -183,7 +183,7 @@ const Checkout = () => {
       {/* Order Summary Modal */}
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-gray-950 text-white w-full max-w-4xl rounded-lg p-6 shadow-lg relative mx-2 md:grid md:grid-cols-2 md:gap-6">
+          <div className="bg-gray-950 text-white w-full max-w-4xl rounded-lg p-6 shadow-lg relative mx-2 md:grid md:grid-cols-2 md:gap-6 overflow-y-auto max-h-screen">
             {/* Modal Header */}
             <h2 className="text-2xl font-bold mb-6 md:col-span-2 text-center">Order Summary</h2>
 
