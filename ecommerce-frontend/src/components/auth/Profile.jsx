@@ -186,7 +186,7 @@ const Profile = () => {
                 className="w-full px-4 py-2 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             ) : (
-              <p className="text-lg text-white break-words">{userDetails.address}</p>
+              <p className="text-base md:text-lg text-white break-words">{userDetails.address}</p>
             )}
           </div>
         </div>
