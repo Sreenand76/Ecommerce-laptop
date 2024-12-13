@@ -152,8 +152,8 @@ const Profile = () => {
                 className="w-full px-4 py-2 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             ) : (
-              <div className="w-32 overflow-hidden text-ellipsis whitespace-nowrap" title={userDetails.email}>
-                <p className="text-lg text-white">{userDetails.email}</p>
+            
+                <p className="text-lg text-white break-words">{userDetails.email}</p>
               </div>
 
             )}
