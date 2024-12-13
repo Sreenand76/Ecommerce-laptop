@@ -108,7 +108,7 @@ const LandingPage = () => {
           {/* Hero Image */}
           <div className="w-full max-w-[70vw] md:max-w-[30vw] min-h-[20vh] md:min-h-[60vh] mt-4 md:mt-12 lg:mt-0 flex justify-center items-center overflow-hidden  ">
             <img
-              src="images/laptopHero.png"
+              src="images/laptopHero1.png"
               alt="Laptop Showcase"
               className="rounded-lg shadow-lg  transition-all duration-1000 transform hover:scale-105 opacity-80 " // Smooth scale and transition effects
             />
