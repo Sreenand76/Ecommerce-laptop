@@ -88,10 +88,10 @@ const LandingPage = () => {
           {/* Hero Content */}
 
           <div className=" ">
-            <h1 className="text-[40px] md:text-6xl lg:text-7xl font-extrabold leading-tight ">
+            <h1 className="text-[40px] md:text-6xl lg:text-7xl font-extrabold leading-tight text-white">
               Find Your Perfect Laptop
             </h1>
-            <p className="mt-6 text-xl font-thin text-gray-300">
+            <p className="mt-6 text-lg md:text-xl font-thin text-gray-400">
               Discover the best laptops for gaming, work, and creativity.
               Built for performance, tailored for you.
             </p>
@@ -133,7 +133,7 @@ const LandingPage = () => {
 
       {/* Featured Products */}
       <section className="w-full mx-auto px-6 py-12">
-        <h2 className="text-4xl font-bold text-center text-gray-100 mb-10">
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-100 mb-10">
           Featured Laptops
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -200,7 +200,7 @@ const LandingPage = () => {
 
 
       {/* Call-to-Action Section */}
-      <section className="bg-black text-gray-100 py-16 px-2 md:px-0">
+      <section className="bg-black text-gray-100 py-16 px-4 md:px-0">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold">Stay Updated with the Latest Deals</h2>
           <p className="mt-4 text-base text-gray-300">
