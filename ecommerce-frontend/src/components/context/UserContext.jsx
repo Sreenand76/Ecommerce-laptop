@@ -59,10 +59,6 @@ export const UserProvider = ({ children }) => {
 
     const isInWishlist = wishlist.includes(laptopId); // Check initial state
 
-    // Show intermediate toast for feedback
-    toast[isInWishlist ? "info" : "success"](
-      isInWishlist ? "Removing from Wishlist..." : "Adding to Wishlist ❤️...", toastOptionsFast);
-
     try {
       // Optimistically update local state
       setWishlist((prevWishlist) =>
@@ -105,7 +101,6 @@ export const UserProvider = ({ children }) => {
       return;
     }
 
-    toast.success("Adding Laptop to Cart...", toastOptionsFast);
     try {
       const cartItem = {
         color: selectedColor || product.availableColours?.[0] || "Default Color",
