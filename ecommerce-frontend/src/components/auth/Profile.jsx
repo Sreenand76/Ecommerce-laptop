@@ -136,7 +136,7 @@ const Profile = () => {
                 className="w-full px-4 py-2 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             ) : (
-              <p className="text-lg text-white break-words">{userDetails.name}</p>
+              <p className="text-base md:text-lg text-white break-words">{userDetails.name}</p>
             )}
           </div>
 
@@ -151,10 +151,8 @@ const Profile = () => {
                 onChange={handleChange}
                 className="w-full px-4 py-2 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-            ) : (
-            
-                <p className="text-lg text-white break-words">{userDetails.email}</p>
-             
+            ) : (             
+                <p className="text-base md:text-lg text-white break-words">{userDetails.email}</p>
             )}
           </div>
 
@@ -170,7 +168,7 @@ const Profile = () => {
                 className="w-full px-4 py-2 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             ) : (
-              <p className="text-lg text-white">{userDetails.phone}</p>
+              <p className="text-base md:text-lg text-white">{userDetails.phone}</p>
             )}
           </div>
 
@@ -199,7 +197,7 @@ const Profile = () => {
           </Link>
           <Link to="/cart" className="w-full">
             <button className="w-full bg-gray-800 hover:bg-gray-700 text-white py-3 px-6 rounded-md text-sm font-medium">
-              My Cart
+              My Cart 
             </button>
           </Link>
           <Link to="/wishlist" className="w-full">
@@ -272,6 +270,10 @@ const Profile = () => {
       </div>
     </div>
   );
+};
+
+export default Profile;
+
 };
 
 export default Profile;
