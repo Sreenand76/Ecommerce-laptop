@@ -200,7 +200,7 @@ const Profile = () => {
           </Link>
           <Link to="/cart" className="w-full">
             <button className="w-full bg-gray-800 hover:bg-gray-700 text-white py-3 px-6 rounded-md text-sm font-medium">
-              My Cart Items
+              My Cart
             </button>
           </Link>
           <Link to="/wishlist" className="w-full">
