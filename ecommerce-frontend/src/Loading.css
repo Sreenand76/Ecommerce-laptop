@@ -1,0 +1,61 @@
+/* Spinner Container */
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  animation: fadeIn 1s ease-out;
+}
+
+/* Stylish Spinner with a color change effect */
+.spinner {
+  border: 4px solid #dadada; /* Light gray background */
+  border-top: 4px solid #3498db; /* Blue top part of spinner */
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1.5s linear infinite, color-change 3s infinite alternate;
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.6), 0 0 20px rgba(52, 152, 219, 0.4);
+}
+
+/* Spinner spinning animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Spinner color transition animation */
+@keyframes color-change {
+  0% {
+    border-top-color: #3498db; /* Initial blue */
+  }
+  50% {
+    border-top-color: #ff6347; /* Change to red */
+  }
+  100% {
+    border-top-color: #3498db; /* Change back to blue */
+  }
+}
+
+/* Fade-in effect for the spinner */
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.fade-text {
+  animation: fadeInOut 3s infinite;
+}
+
+/* Fading text animation */
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

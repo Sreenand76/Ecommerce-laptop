@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  background-color:black;
+
+  color: rgb(201, 201, 201);
+}
+html {
+  scroll-behavior: smooth;
+}
+
+/* Autofill background and text styling */
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  box-shadow: 0 0 0 1200px rgb(31, 41, 55) inset !important; /* Explicit background color */
+  -webkit-box-shadow: 0 0 0 1200px rgb(31, 41, 55) inset !important;
+  -webkit-text-fill-color: white !important; /* White text for readability */
+  caret-color: white; /* Ensure the caret (cursor) is visible */
+  transition: background-color 0s ease-in-out 0s, color 0s ease-in-out 0s; /* Remove long transition to allow proper selection */
+}
+
+/* Autofill focus styling */
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: white !important;
+  caret-color: white;
+}
+
+/* Skeleton Loader Styles */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite ease-in-out;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-card {
+  width: 100%;
+  height: 300px;
+  border-radius: 12px;
+  margin: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.skeleton-title {
+  height: 20px;
+  width: 60%;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.skeleton-description {
+  height: 15px;
+  width: 80%;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.skeleton-price {
+  height: 25px;
+  width: 40%;
+  border-radius: 8px;
+}
+
+.skeleton-button {
+  height: 36px;
+  width: 120px;
+  border-radius: 8px;
+  background-color: #cccccc;
+}
+.price {
+  display: inline-block; /* Ensure the element's dimensions remain consistent */
+  text-align: center; /* Align text */
+  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  transform-origin: center; /* Keep the scale centered */
+}
+
+.price-changing {
+  transform: scale(1.1); /* Subtle scaling */
+  color: #22c55e; /* Soft green highlight */
+  opacity: 0.8; /* Slight fade effect */
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.dropdown-item:hover {
+  background: #f0f0f0;
+}
+
+/* laptop filtering animation */
+/* Combined fade-in, zoom-in, and bounce effect */
+/* Shimmer effect */
+.laptop-list-enter {
+  opacity: 0;
+  animation: shimmer 1s linear forwards;
+}
+
+.laptop-list-enter-active {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.laptop-list-exit {
+  opacity: 1;
+}
+
+.laptop-list-exit-active {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+  0% {
+    background-position: -200%;
+  }
+  100% {
+    background-position: 200%;
+  }
+}
+
+/* Hide scrollbar in WebKit browsers (Chrome, Safari, Edge) */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+.hide-scrollbar {
+  scrollbar-width: none;
+}
