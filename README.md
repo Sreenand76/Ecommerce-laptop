@@ -31,6 +31,13 @@ This project is a fully functional E-commerce Laptop Store Platform built during
 
 ---
 
+## 🔮 Future Scope
+
+- Implement a recommendation system based on user preferences.
+- Integrate payment gateway (e.g., Stripe or PayPal).
+
+---
+
 ## 🚀 Live Demo
 
 ⚠️ The live demo link currently seems to be non-functional. If you're facing deployment issues, consider checking:
