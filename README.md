@@ -1,28 +1,30 @@
-E-commerce Laptop Store Platform
+#E-commerce Laptop Store Platform
 
 This project is a fully functional E-commerce Laptop Store Platform built during my CodeSoft Internship. It allows users to browse and purchase laptops with dynamic pricing based on their selected specifications.
 
-🛠️ Technologies Used
+🛠️ ##Technologies Used
 
-Frontend:
+###Frontend:
 
 React.js: JavaScript library for building user interfaces.
+
 Tailwind CSS: Utility-first CSS framework for styling and responsiveness.
 
-Backend:
+###Backend:
 
 Spring Boot: Framework for creating Java-based web applications and RESTful APIs.
+
 PostgreSQL: Relational database for storing product and user data.
 
-Containerization:
+###Containerization:
 
 Docker: Ensures seamless and consistent deployment across all environments.
 
-Authentication & Security:
+###Authentication & Security:
 
 JWT (JSON Web Tokens): Provides secure authentication and role-based authorization for API endpoints.
 
-🎯 Key Features
+🎯 ##Key Features
 
 Dynamic Pricing Model:Laptop prices are automatically adjusted based on user-selected specifications (e.g., RAM, storage, etc.).
 
@@ -33,7 +35,7 @@ JWT Authentication and Authorization:Secure user login, session management, and 
 Dockerized Backend:Simplifies deployment by containerizing the backend, ensuring consistency across different environments.
 
 
-🚀 Live Demo
+🚀##Live Demo
 
 You can check out the live demo of the project here:https://prismtech7-laptops.vercel.app/
 
