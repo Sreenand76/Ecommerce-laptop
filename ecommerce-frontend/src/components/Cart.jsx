@@ -22,7 +22,7 @@ const Cart = () => {
         const cart = await getUserCartItems(userId);
         const cartWithDetails = await Promise.all(
           cart.map(async (item) => {
-            const { id, ...laptopDetails } = await getLaptopById(item.laptopId);
+            const laptopDetails = await getLaptopById(item.laptopId);
             return { ...item, ...laptopDetails }; // Merge cart item and laptop details
           })
         );
