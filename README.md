@@ -1,4 +1,5 @@
 E-commerce Laptop Store Platform
+
 This project is a fully functional E-commerce Laptop Store Platform built during my CodeSoft Internship. It allows users to browse and purchase laptops with dynamic pricing based on their selected specifications.
 
 🛠️ Technologies Used
