@@ -59,13 +59,13 @@ Once fixed, you can provide the working link here:
    ```
 ### **2. Setup the Frontend**
 ```bash
-cd Ecommerce-frontend
+cd ecommerce-frontend
 npm install
 npm run dev
 ```
 ### **3. Setup the Backend**
 ```bash
-cd Ecommerce-backend
+cd ecommerce-backend
 mvn clean install
 mvn spring-boot:run
 ```
