@@ -52,11 +52,11 @@ Once fixed, you can provide the working link here:
 
 ## 📂 Project Setup
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Sreenand76/Ecommerce-laptop.git
-   cd Ecommerce-laptop
-   ```
+### **1. Clone the Repository**
+```bash
+git clone https://github.com/Sreenand76/Ecommerce-laptop.git
+cd Ecommerce-laptop
+```
 ### **2. Setup the Frontend**
 ```bash
 cd ecommerce-frontend
