@@ -54,7 +54,7 @@ const Checkout = () => {
       });
       setShowModal(false);
 
-      toast.success("Order was successfully placed", {
+      toast.success("Order successfully placed", {
         position: "top-right",
         autoClose: 2000,
         theme: "dark",
@@ -86,7 +86,7 @@ const Checkout = () => {
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center px-3">
       <div className="w-full max-w-md bg-gray-800 rounded-lg shadow-lg px-5 md:px-8 py-7 mx-4 mt-12 border border-gray-600 ">
         {errorMessage && (
           <div className="bg-red-600 text-white px-4 py-3 rounded-lg mb-4 text-sm">

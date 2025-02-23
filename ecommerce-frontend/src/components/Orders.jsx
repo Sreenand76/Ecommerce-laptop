@@ -87,7 +87,7 @@ const Orders = () => {
         {orders.map((order) => (
           <div
             key={order.id}
-            className="flex flex-col md:flex-row items-center p-4 border border-gray-700 rounded-lg shadow-sm hover:shadow-md transition-shadow bg-gray-950"
+            className="flex flex-col md:flex-row items-center justify-center p-4 border border-gray-700 rounded-lg shadow-sm hover:shadow-md transition-shadow bg-gray-950"
           >
             <img
               src={order.imageUrl}
@@ -97,7 +97,7 @@ const Orders = () => {
 
             <div className="ml-0 md:ml-7 flex-1 text-gray-400 grid grid-cols-2 md:grid-cols-4 gap-4">
               {/* Order Details */}
-              <div className="col-span-2 md:col-span-2 ">
+              <div className="col-span-2 md:col-span-2 flex flex-col justify-center items-center">
                 <h3 className="text-lg font-medium text-blue-400">
                   {order.name}
                 </h3>
@@ -122,7 +122,7 @@ const Orders = () => {
               <div className="col-span-2 md:col-span-1 flex md:flex-col space-x-4 sm:space-x-0 sm:space-y-2 justify-center mt-4 sm:mt-0 md:px-10 gap-1">
 
                 <button
-                  className="bg-red-800 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors text-xs"
+                  className="bg-red-800 text-white px-3 py-2 rounded-lg hover:bg-red-600 transition-colors text-xs"
                   onClick={() => handleCancelOrder(order.id)}
                 >
                   Cancel Order

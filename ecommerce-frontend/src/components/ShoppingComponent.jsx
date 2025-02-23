@@ -180,12 +180,12 @@ const ShoppingComponent = () => {
           {/* Processor */}
           <div>
             <h3 className="font-bold text-lg mb-2 text-blue-300">Processor</h3>
-            <label className="block mb-2 cursor-pointer hover:text-blue-400">
+            <label className="block mb-2 cursor-pointer hover:text-blue-400 flex items-center">
               <input type="checkbox" className="mr-2 accent-blue-500"
                 checked={selectedProcessors.includes("Intel")}
                 onChange={() => handleProcessorChange("Intel")} /> Intel
             </label>
-            <label className="block mb-2 cursor-pointer hover:text-blue-400">
+            <label className="block mb-2 cursor-pointer hover:text-blue-400 flex items-center">
               <input type="checkbox" className="mr-2 accent-blue-500"
                 checked={selectedProcessors.includes("AMD")}
                 onChange={() => handleProcessorChange("AMD")} /> AMD
@@ -195,12 +195,12 @@ const ShoppingComponent = () => {
           {/* Graphics Card */}
           <div>
             <h3 className="font-bold text-lg mb-2 text-blue-300">Graphics Card</h3>
-            <label className="block mb-2 cursor-pointer hover:text-blue-400">
+            <label className="block mb-2 cursor-pointer hover:text-blue-400 flex items-center">
               <input type="checkbox" className="mr-2 accent-blue-500"
                 checked={selectedGraphicsCards.includes("dedicated")}
                 onChange={() => handleGraphicsCardChange("dedicated")} />Dedicated
             </label>
-            <label className="block mb-2 cursor-pointer hover:text-blue-400">
+            <label className="block mb-2 cursor-pointer hover:text-blue-400 flex items-center">
               <input type="checkbox" className="mr-2 accent-blue-500"
                 checked={selectedGraphicsCards.includes("integrated")}
                 onChange={() => handleGraphicsCardChange("integrated")}

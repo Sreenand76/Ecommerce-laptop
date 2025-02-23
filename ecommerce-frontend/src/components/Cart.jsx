@@ -22,7 +22,7 @@ const Cart = () => {
         const cart = await getUserCartItems(userId);
         const cartWithDetails = await Promise.all(
           cart.map(async (item) => {
-            const { id, ...laptopDetails } = await getLaptopById(item.laptopId);
+            const laptopDetails  = await getLaptopById(item.laptopId);
             return { ...item, ...laptopDetails }; // Merge cart item and laptop details
           })
         );
@@ -42,7 +42,6 @@ const Cart = () => {
     console.log(item)
     try {
       await RemoveItemFromCart(userId, item.id, item);
-
       setCartItems((prevItems) =>
         prevItems.filter(
           (cartItem) =>
@@ -153,7 +152,7 @@ const Cart = () => {
                       Remove
                     </button>
                     <button
-                      className="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors text-sm"
+                      className="bg-blue-700 text-white px-3 py-2 rounded-lg hover:bg-blue-800 transition-colors text-sm"
                       onClick={() => proceedToCheckOut(item)}
                     >
                       Order Now

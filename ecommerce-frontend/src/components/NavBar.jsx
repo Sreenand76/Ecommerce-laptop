@@ -66,6 +66,7 @@ const NavBar = () => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setSearchResults([]); // Close dropdown if clicked outside
+        
       }
     };
 
@@ -162,7 +163,7 @@ const NavBar = () => {
 
 
         {/* Account and Cart */}
-        <div className="hidden lg:flex items-center space-x-6">
+        <div ref={dropdownRef} className="hidden lg:flex items-center space-x-6">
           <div className="relative">
             <button
               className="hover:text-white transition flex items-center space-x-2"

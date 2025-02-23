@@ -162,6 +162,17 @@ const UpdateLaptop = () => {
               placeholder="Enter processor details"
             />
           </div>
+          <div>
+            <label className="block mb-2 text-gray-300">Graphics Card</label>
+            <input
+              type="text"
+              name="graphicsCard"
+              value={laptopDetails.graphicsCard}
+              onChange={handleChange}
+              className="border border-transparent p-3 w-full bg-gray-800 rounded-md text-white focus:border-blue-500 focus:ring focus:ring-blue-500 focus:outline-none"
+              placeholder="Enter processor details"
+            />
+          </div>
         </div>
 
         {/* Description */}

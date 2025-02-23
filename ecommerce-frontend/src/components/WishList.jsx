@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { RemoveItemFromWishList, getLaptopById, getUserWishList} from "../util/ApiFunctions";
 import { useAuth } from "./auth/AuthProvider";
 import BackButton from "./ui/BackButton";
+import { useNavigate } from "react-router-dom";
 
 
 const Wishlist = () => {
@@ -12,7 +13,7 @@ const Wishlist = () => {
   const { state } = useAuth();
   const { user } = state;
   const userId = user.email;
- 
+ const navigate=useNavigate();
 
   useEffect(() => {
     const fetchWishlistItemsWithDetails = async () => {
@@ -138,7 +139,7 @@ const Wishlist = () => {
                       Remove
                     </button>
                     <button
-                      className="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors text-sm"
+                      className="bg-blue-700 text-white px-3 py-2 rounded-lg hover:bg-green-600 transition-colors text-sm"
                       onClick={() => ViewLaptop(item.id)}
                     >
                       Add to Cart

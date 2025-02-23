@@ -8,7 +8,7 @@ export const InfiniteMovingImages = ({
   items,
   direction = "left",
   speed = "fast",
-  pauseOnHover = true,
+  pauseOnHover = false,
   className,
 }) => {
   const containerRef = React.useRef(null);
@@ -70,13 +70,12 @@ export const InfiniteMovingImages = ({
         className={cn(
           "flex min-w-full shrink-0 gap-4 py-4 w-max flex-nowrap",
           start && "animate-scroll",
-          pauseOnHover && "hover:[animation-play-state:paused]"
         )}
       >
         {items.map((item, idx) => (
           <li
             key={idx}
-            className="flex-shrink-0 w-[100px] h-[100px] md:w-[150px] md:h-[150px] relative rounded-lg overflow-hidden"
+            className="flex-shrink-0 w-[100px] h-[100px] md:w-[150px] md:h-[150px] lg:w-[170px] lg:h-[170px] relative rounded-lg overflow-hidden"
           >
             <img
               src={item}              

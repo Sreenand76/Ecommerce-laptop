@@ -10,6 +10,9 @@ body{
 html {
   scroll-behavior: smooth;
 }
+* {
+  font-family: 'Poppins', Arial, sans-serif;
+}
 
 /* Autofill background and text styling */
 input:-webkit-autofill,

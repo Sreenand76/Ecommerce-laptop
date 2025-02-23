@@ -49,8 +49,8 @@ const Login = () => {
             {errorMessage}
           </div>
         )}
-        <h2 className="text-3xl font-bold text-center text-gray-100 mb-6">
-          Welcome Back
+        <h2 className="text-3xl font-semibold text-center text-gray-100 mb-6">
+          Login
         </h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-5">
