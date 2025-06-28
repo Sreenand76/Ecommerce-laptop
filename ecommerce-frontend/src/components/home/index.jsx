@@ -1,9 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
-import { InfiniteMovingImages } from "./ui/InfiniteMovingImages";
-import { Subscription, getFeaturedLaptops } from "../util/ApiFunctions";
+import { InfiniteMovingImages } from "../ui/InfiniteMovingImages";
+import { Subscription, getFeaturedLaptops } from "../../util/ApiFunctions";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { useAuth } from "./auth/AuthProvider";
+import { useAuth } from "../auth/AuthProvider";
 
 const LandingPage = () => {
 
@@ -13,7 +13,7 @@ const LandingPage = () => {
     "https://imgs.search.brave.com/HvrU6fLGAyKAxiilTW79xtEcBVJVg-U1l4KgX0MyxmU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMuc3RpY2twbmcu/Y29tL3RodW1icy82/MTNiNjU4NDMwZTg1/MzAwMDRiYTNhMDcu/cG5n", // HP
     "https://imgs.search.brave.com/1bhL6ufZamxoV5Ikhs9IXvQoGD4DPumk9Nh2polNLQ8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly8xMDAw/bG9nb3MubmV0L3dw/LWNvbnRlbnQvdXBs/b2Fkcy8yMDE2LzEw/L0FwcGxlX2xvZ29f/Z3JleS02MjR4NDAw/LnBuZw", // Dell
     "https://imgs.search.brave.com/hNbTcDhjZusEEMORHDHuTUIDkQMMRI3LoEip3NU6Zfw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy8w/LzAwL0FjZXJfMjAx/MS5zdmc", // Apple
-    "https://imgs.search.brave.com/UY9_91ROwwKYQUVhZJ3EZj9ei7MEjdVwRbfeNygIUSM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/d29ybGR2ZWN0b3Js/b2dvLmNvbS9sb2dv/cy9hc3VzLWxvZ28t/MS5zdmc", // Acer
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTV1CMnR-I7HTpzlOpDEh3WI9trpCDwj04iQtKdjg1ewA2YkUXAwOFpSAcZod8QQdtBDM4&usqp=CAU", // Acer
     "https://imgs.search.brave.com/xNJN85SpZqngrI10XQV0bVOe7IdqwhD0PL9gh-_m-NY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy80/LzQ4L0RlbGxfTG9n/by5zdmc",// Lenovo
   ];
 
@@ -43,7 +43,7 @@ const LandingPage = () => {
   const handleSubscription = async (e) => {
     e.preventDefault();
     if (!user || !user.email) {
-      toast.error("User not logged in",  {
+      toast.error("User not logged in", {
         position: "top-right",
         autoClose: 2000,
         theme: "dark",
@@ -104,7 +104,7 @@ const LandingPage = () => {
             </h1>
             <p className="mt-6 text-lg md:text-xl font-thin text-gray-400">
               Discover the best laptops for gaming, work, and creativity.
-              Built for performance, tailored <br/>for you.
+              Built for performance, tailored <br />for you.
             </p>
             <div className="mt-8 md:mt-12 flex space-x-4 mb-8">
               <Link to={"/shopping-cart"}>
@@ -118,12 +118,12 @@ const LandingPage = () => {
 
           {/* Hero Image */}
           <div className="w-full max-w-[70vw] md:max-w-[30vw] min-h-[20vh] md:min-h-[60vh] mt-4 md:mt-12 lg:mt-0 flex justify-center items-center overflow-hidden  ">
-              <img
-                src="images/laptopHero1.png"
-                alt="Laptop Showcase"
-                className="rounded-lg shadow-lg transition-all duration-1000 transform hover:scale-105 opacity-80"
-                loading="lazy"
-              />            
+            <img
+              src="images/laptopHero1.png"
+              alt="Laptop Showcase"
+              className="rounded-lg shadow-lg transition-all duration-1000 transform hover:scale-105 opacity-80"
+              loading="lazy"
+            />
           </div>
 
         </div>
@@ -181,7 +181,7 @@ const LandingPage = () => {
                 key={index}
                 className="w-full bg-gray-900 rounded-lg shadow-md hover:shadow-lg border border-gray-950 hover:border-gray-600 transition transform"
               >
-                
+
                 {/* Image */}
                 <img
                   src={laptop.imageUrl}
@@ -208,7 +208,7 @@ const LandingPage = () => {
               </div>
             ))
           )}
-        </div> 
+        </div>
       </section>
 
 

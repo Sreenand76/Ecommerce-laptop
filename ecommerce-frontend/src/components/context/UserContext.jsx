@@ -18,6 +18,7 @@ export const UserProvider = ({ children }) => {
   const [checkOutCartItemDetails, setCheckoutCartItemDetails] = useState([]);
   const { state } = useAuth();
   const { user } = state;
+  const email = user?.email || JSON.parse(localStorage.getItem("user"))?.email;
 
   const toastOptionsSlow = {
     position: "top-right",
@@ -39,8 +40,8 @@ export const UserProvider = ({ children }) => {
     };
     const fetchWishlist = async () => {
       try {
-        const data = await getUserWishList(user.email);
-        setWishlist(data.map((item) => item.laptopId)); // Map to laptop IDs
+        const data = await getUserWishList(email);
+        setWishlist(data.map((item) => item.laptop.id)); 
       } catch (error) {
         console.error("Failed to fetch wishlist", error);
       }
@@ -94,42 +95,41 @@ export const UserProvider = ({ children }) => {
   };
 
   const handleAddToCart = async (product, selectedColor, selectedRAM, selectedStorage, selectedQuantity, finalPrice) => {
-
     if (!user || !user.email) {
       toast.error("User not logged in", toastOptionsSlow);
       return;
     }
-
+  
     if (!product || !product.id) {
       toast.error("Invalid product details", toastOptionsSlow);
       return;
     }
-
+  
     toast.success("Adding Laptop to Cart...", toastOptionsFast);
+  
     try {
+      
       const cartItem = {
-        color: selectedColor || product.availableColours?.[0] || "Default Color",
-        ram:
-          selectedRAM ||
-          product.specs?.find((spec) => spec.specType === "RAM")?.specValue,
-        storage:
-          selectedStorage ||
-          product.specs?.find((spec) => spec.specType === "ROM")?.specValue,
-        quantity: selectedQuantity || 1,
-        totalPrice: finalPrice || product.basePrice,
+        selectedSpec: {
+          color: selectedColor || product.availableColours?.[0]?.color,
+          ram: selectedRAM || product.specs?.find(spec => spec.specType === "RAM")?.specValue,
+          storage: selectedStorage || product.specs?.find(spec => spec.specType === "ROM")?.specValue,
+          finalPrice: finalPrice || product.basePrice,
+        },
+        quantity: selectedQuantity || 1
       };
-
-      await addToUserCart(user.email, product.id, cartItem);
-
-      setCart((prevCart) => [...prevCart, { ...product, cartItem }]);
-
+  
+      await addToUserCart(user.email,product.id,cartItem);
+  
+      setCart((prevCart) => [...prevCart, { ...product, cartItem: cartItem }]);
+  
       toast.success("Laptop added to cart", toastOptionsSlow);
     } catch (error) {
       console.error("Error adding laptop to cart:", error);
       toast.error("Failed to add laptop to cart. Please try again.", toastOptionsSlow);
     }
   };
-
+  
   return (
     <UserContext.Provider
       value={{

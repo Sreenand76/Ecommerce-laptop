@@ -1,11 +1,10 @@
 import React from 'react';
-import Home from './components/Home';
-import NavBar from './components/NavBar';
+import Home from './components/home';
+import NavBar from './components/navbar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import ShoppingComponent from './components/ShoppingComponent';
+import ShoppingComponent from './components/shop/ShoppingComponent';
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import LaptopDetails from './components/LaptopDetails';
 import Login from './components/auth/Login';
 import { LaptopProvider } from './components/context/LaptopContext';
 import { UserProvider } from './components/context/UserContext';
@@ -13,26 +12,28 @@ import { AuthProvider } from './components/auth/AuthProvider';
 import Registration from './components/auth/Registration';
 import LogOut from './components/auth/LogOut';
 import UpdateLaptop from './components/Laptop/UpdateLaptop';
+import LaptopDetails from './components/Laptop/LaptopDetails';
 import LaptopList from './components/Laptop/LaptopList';
 import AdminPanel from './components/admin/AdminPanel';
-import Cart from './components/Cart';
+import Cart from './components/cart';
 import Profile from './components/auth/Profile';
-import Wishlist from './components/WishList';
-import Checkout from './components/Order/CheckOut';
-import Orders from './components/Orders';
-import AboutSection from './components/AboutSection';
-import ContactSection from './components/Contact';
+import Wishlist from './components/wishlist';
+import Checkout from './components/checkout';
+import Orders from './components/Order';
+import AboutSection from './components/about';
+import ContactSection from './components/contact';
 import AllOrders from './components/admin/AllOrders';
 import ManageUsers from './components/admin/ManageUsers';
 import AddLaptop from './components/Laptop/AddLaptop';
-
-
+import { Elements } from '@stripe/react-stripe-js';
+import stripePromise from './stripe';
 
 function App() {
 
   return (
     <>
       <AuthProvider>
+      <Elements stripe={stripePromise}>
         <BrowserRouter>
           <ToastContainer />
           <UserProvider>
@@ -62,6 +63,7 @@ function App() {
             </LaptopProvider>
           </UserProvider>
         </BrowserRouter>
+        </Elements>
       </AuthProvider>
     </>
   )

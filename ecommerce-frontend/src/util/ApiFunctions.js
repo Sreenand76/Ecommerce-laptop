@@ -9,6 +9,9 @@ export const laptop = axios.create({
 export const user = axios.create({
   baseURL: `${import.meta.env.VITE_API_URL}/users`
 })
+export const payment = axios.create({
+  baseURL: `${import.meta.env.VITE_API_URL}/api/payments` 
+});
 
 export const getHeader = () => {
   const token = localStorage.getItem("token");
@@ -16,6 +19,20 @@ export const getHeader = () => {
     Authorization : `Bearer ${token}`,
   }
 }
+
+export const createPaymentIntent = async (amount, currency) => {
+  try {
+    const response = await payment.post("/create-intent",
+      { amount, currency },
+      { headers: getHeader() } 
+    );
+    return response.data.clientSecret; 
+  } catch (error) {
+    console.error("Error creating payment intent:", error);
+    throw error; 
+  }
+};
+
 
 export const getAllLaptops = async () => {
   try {
@@ -68,6 +85,7 @@ export async function loginUser(login) {
     return null;
   }
 }
+
 export const getUserDetails = async (email) => {
   try {
     const response = await user.get(`/${email}`, {
@@ -110,6 +128,7 @@ export async function getAllBrands() {
 export async function getFeaturedLaptops() {
   try {
     const response = await laptop.get("/featured")
+    console.log(response.data)
     return response.data;
   } catch (error) {
     console.error("Failed to fetch laptops:", error);
@@ -209,19 +228,21 @@ export async function getUserCartItems(userId) {
   }
 }
 
-export async function RemoveItemFromCart(userId,laptopId,cartItem) {
+export async function RemoveItemFromCart(userId,cartItemId) {
+  console.log(cartItemId)
   try {
-    await user.delete(`/cart/remove/${userId}/${laptopId}?color=${cartItem.color}&ram=${cartItem.ram}&storage=${cartItem.storage}&quantity=${cartItem.quantity}`,{
+    await user.delete(`/cart/remove/${userId}/${cartItemId}`,{
       headers:getHeader()
     });
   } catch (error) {
-    console.error("Failed to remove item wishlist:", error);
+    console.error("Failed to remove item from cart:", error);
     throw error;
   }
 }
-export async function createOrder(userId,OrderDetails) {
+export async function createOrder(userId,laptopId,OrderDetails) {
+
   try {
-    await user.post(`/add/order/${userId}`,OrderDetails,{
+    await user.post(`/add/order/${userId}/${laptopId}`,OrderDetails,{
       headers:getHeader()
     });   
   } catch (error) {

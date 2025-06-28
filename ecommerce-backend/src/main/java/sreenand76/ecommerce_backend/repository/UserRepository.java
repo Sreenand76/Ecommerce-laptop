@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import sreenand76.ecommerce_backend.entity.User;
 
-
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
 	 boolean existsByEmail(String email);

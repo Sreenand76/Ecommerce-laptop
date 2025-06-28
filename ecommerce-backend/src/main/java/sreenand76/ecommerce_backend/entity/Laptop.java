@@ -1,6 +1,9 @@
 package sreenand76.ecommerce_backend.entity;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.*;
 
@@ -12,22 +15,24 @@ public class Laptop {
 
     private String name;
     private String brand;
-    private double basePrice;  // Base price before any dynamic spec adjustments
+    private double basePrice;  
     private String description;
-    private String imageUrl;   // For product images
-    private List<String> availableColours;
-    
-	// Static specs
-    private String processor;     // e.g., i7, i5
-    private String graphicsCard;  // e.g., NVIDIA GTX, Intel UHD
-    private String batteryLife;   // e.g., 10 hours
-    private String os;            // e.g., Windows 10, Linux
-    private String displaySize;   // e.g., 15.6 inches
-    private String displayDetails; // e.g., Full HD, 4K
+    private String imageUrl;   
 
-    // Available dynamic specs (RAM and ROM)
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	// Static specs
+    private String processor;     
+    private String graphicsCard;  
+    private String batteryLife;   
+    private String os;            
+    private String displaySize;   
+    private String displayDetails; 
+
+    @OneToMany(mappedBy = "laptop", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JsonManagedReference
     private List<LaptopSpec> specs;
+    
+    @OneToMany(mappedBy = "laptop", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<LaptopColor> availableColors = new ArrayList<>();
 
     public Long getId() {
 		return id;
@@ -77,12 +82,12 @@ public class Laptop {
 		this.imageUrl = imageUrl;
 	}
 
-	public List<String> getAvailableColours() {
-		return availableColours;
+	public List<LaptopColor> getAvailableColours() {
+		return availableColors;
 	}
 
-	public void setAvailableColours(List<String> availableColours) {
-		this.availableColours = availableColours;
+	public void setAvailableColours(List<LaptopColor> availableColours) {
+		this.availableColors = availableColours;
 	}
 
 	public String getProcessor() {
@@ -144,7 +149,7 @@ public class Laptop {
 	public Laptop() {}
 
 	public Laptop(String name, String brand, double basePrice, String description, String imageUrl,
-			List<String> availableColours, String processor, String graphicsCard, String batteryLife, String os,
+			List<LaptopColor> availableColours, String processor, String graphicsCard, String batteryLife, String os,
 			String displaySize, String displayDetails, List<LaptopSpec> specs) {
 		super();
 		this.name = name;
@@ -152,7 +157,7 @@ public class Laptop {
 		this.basePrice = basePrice;
 		this.description = description;
 		this.imageUrl = imageUrl;
-		this.availableColours = availableColours;
+		this.availableColors = availableColours;
 		this.processor = processor;
 		this.graphicsCard = graphicsCard;
 		this.batteryLife = batteryLife;

@@ -45,7 +45,7 @@ const UpdateLaptop = () => {
   const handleColourChange = (index, value) => {
     setLaptopDetails((prev) => {
       const updatedColours = [...prev.availableColours];
-      updatedColours[index] = value;
+      updatedColours[index] = { color: value };
       return { ...prev, availableColours: updatedColours };
     });
   };
@@ -53,7 +53,7 @@ const UpdateLaptop = () => {
   const handleAddColour = () => {
     setLaptopDetails((prev) => ({
       ...prev,
-      availableColours: [...prev.availableColours, ""],
+      availableColours: [...prev.availableColours, { color: "" }],
     }));
   };
 
@@ -67,9 +67,19 @@ const UpdateLaptop = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await UpdateLaptopfetchedById(id, laptopDetails);
+      const updatedData = {
+        ...laptopDetails,
+        basePrice: parseFloat(laptopDetails.basePrice),
+        specs: laptopDetails.specs.map((spec) => ({
+          ...spec,
+          priceAdjustment: parseFloat(spec.priceAdjustment || 0),
+        })),
+      };
+
+      await UpdateLaptopfetchedById(id, updatedData);
       toast.success("Laptop updated successfully!");
     } catch (err) {
+      console.error(err);
       toast.error("Failed to update laptop.");
     }
   };
@@ -231,7 +241,7 @@ const UpdateLaptop = () => {
               <input
                 type="text"
                 placeholder="Colour"
-                value={colour}
+                value={colour.color}
                 onChange={(e) => handleColourChange(index, e.target.value)}
                 className="border border-transparent p-3 w-full bg-gray-800 rounded-md text-white focus:border-blue-500 focus:ring focus:ring-blue-500 focus:outline-none"
               />

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { RemoveItemFromWishList, getLaptopById, getUserWishList} from "../util/ApiFunctions";
-import { useAuth } from "./auth/AuthProvider";
-import BackButton from "./ui/BackButton";
+import { RemoveItemFromWishList, getLaptopById, getUserWishList } from "../../util/ApiFunctions";
+import { useAuth } from "../auth/AuthProvider";
+import "../../Loading.css";
+import BackButton from "../ui/BackButton";
 import { useNavigate } from "react-router-dom";
-
 
 const Wishlist = () => {
   const [wishlistItems, setWishlistItems] = useState([]);
@@ -13,25 +13,17 @@ const Wishlist = () => {
   const { state } = useAuth();
   const { user } = state;
   const userId = user.email;
- const navigate=useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchWishlistItemsWithDetails = async () => {
       try {
-        const wishlist = await getUserWishList(userId);
-      
-        const wishlistWithDetails = await Promise.all(
-          wishlist.map(async (item) => {
-            const laptopDetails = await getLaptopById(item.laptopId);
-            return { ...item, ...laptopDetails }; 
-          })
-        );
-        setWishlistItems(wishlistWithDetails);
+        const wishlistItems = await getUserWishList(userId);
+        setWishlistItems(wishlistItems);
       } catch (error) {
         console.error("Failed to fetch wishlist items:", error);
       } finally {
         setLoading(false);
-        console.log("Finished fetching wishlist items.");
       }
     };
 
@@ -40,7 +32,7 @@ const Wishlist = () => {
 
   const handleRemoveItem = async (item) => {
     try {
-      await RemoveItemFromWishList(userId, item.id);
+      await RemoveItemFromWishList(userId, item.laptop.id);
       setWishlistItems((prevItems) => prevItems.filter((i) => i.id !== item.id));
       toast.success("Item removed from wishlist", {
         position: "top-right",
@@ -69,15 +61,15 @@ const Wishlist = () => {
   if (wishlistItems.length === 0) {
     return (
       <>
-      <div className="pt-3 pl-3">
-      <BackButton/>
-      </div>
-      
-       <div className="mt-[25vh] flex justify-center text-xl md:text-2xl">
-        No Items in Wishlist.
-      </div>
+        <div className="pt-3 pl-3">
+          <BackButton />
+        </div>
+
+        <div className="mt-[25vh] flex justify-center text-xl md:text-2xl">
+          No Items in Wishlist.
+        </div>
       </>
-     
+
     );
   }
 
@@ -87,7 +79,7 @@ const Wishlist = () => {
 
   return (
     <div className="max-w-5xl mx-auto p-4">
-      <div className="md:hidden"><BackButton/></div>
+      <div className="md:hidden"><BackButton /></div>
       <h2 className="text-2xl font-bold text-gray-300 mb-6 text-center">
         My Wishlist Items
       </h2>
@@ -107,8 +99,8 @@ const Wishlist = () => {
                 className="flex flex-col md:flex-row items-center p-4 border border-gray-700 rounded-lg shadow-sm hover:shadow-md transition-shadow bg-gray-950"
               >
                 <img
-                  src={item.imageUrl}
-                  alt={`${item.name || `Laptop ${item.laptopId}`}`}
+                  src={item.laptop.imageUrl}
+                  alt={item.laptop.name}
                   className="w-full md:w-36 h-36 object-contain mb-4 sm:mb-0"
                 />
 
@@ -116,17 +108,17 @@ const Wishlist = () => {
                   {/* Product Details */}
                   <div className="col-span-2 md:col-span-2 ">
                     <h3 className="text-lg font-medium text-blue-400">
-                      {item.name || `Laptop ${item.laptopId}`}
+                      {item.laptop.name}
                     </h3>
-                    <p className="text-sm mt-1">Processor: {item.processor}</p>
-                    <p className="text-sm mt-1">Graphics Card: {item.graphicsCard}</p>
-                    <p className="text-sm mt-1">Display: {item.displayDetails}</p>
+                    <p className="text-sm mt-1">Processor: {item.laptop.processor}</p>
+                    <p className="text-sm mt-1">Graphics Card: {item.laptop.graphicsCard}</p>
+                    <p className="text-sm mt-1">Display: {item.laptop.displayDetails}</p>
                   </div>
-                  
+
                   {/* Price */}
                   <div className="col-span-2 md:col-span-1 text-left md:mt-14">
                     <p className="text-sm font-semibold text-green-400">
-                      Base Price: ₹{item.basePrice.toLocaleString("en-IN")}
+                      Base Price: ₹{item.laptop.basePrice.toLocaleString("en-IN")}
                     </p>
                   </div>
 
@@ -140,7 +132,7 @@ const Wishlist = () => {
                     </button>
                     <button
                       className="bg-blue-700 text-white px-3 py-2 rounded-lg hover:bg-green-600 transition-colors text-sm"
-                      onClick={() => ViewLaptop(item.id)}
+                      onClick={() => ViewLaptop(item.laptop.id)}
                     >
                       Add to Cart
                     </button>
@@ -148,6 +140,7 @@ const Wishlist = () => {
                 </div>
               </div>
             ))}
+
           </div>
         </>
       )}

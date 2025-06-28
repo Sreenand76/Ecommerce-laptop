@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 
 const ManageUsers = () => {
-  const [users, setUsers] = useState([]); // State to hold the fetched user data
+  const [users, setUsers] = useState([]); 
   const [filteredUsers, setFilteredUsers] = useState([]); // State to hold filtered user data
   const [loading, setLoading] = useState(true); // Loading state
   const [searchQuery, setSearchQuery] = useState(""); // Search input state

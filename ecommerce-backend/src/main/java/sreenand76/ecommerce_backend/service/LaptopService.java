@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import sreenand76.ecommerce_backend.entity.Laptop;
+import sreenand76.ecommerce_backend.entity.LaptopColor;
+import sreenand76.ecommerce_backend.entity.LaptopSpec;
 import sreenand76.ecommerce_backend.repository.LaptopRepository;
 
 @Service
@@ -19,9 +21,27 @@ public class LaptopService implements ILaptopService {
 
     @Override
     public List<Laptop> addLaptops(List<Laptop> laptops) {
-      
+        for (Laptop laptop : laptops) {
+
+            // ✅ Set the parent for each spec
+            if (laptop.getSpecs() != null) {
+                for (LaptopSpec spec : laptop.getSpecs()) {
+                    spec.setLaptop(laptop);
+                }
+            }
+
+            // ✅ Set the parent for each color
+            if (laptop.getAvailableColours() != null) {
+                for (LaptopColor color : laptop.getAvailableColours()) {
+                    color.setLaptop(laptop);
+                }
+            }
+        }
+
+        // ✅ Save all laptops, will cascade to specs and colors
         return laptopRepository.saveAll(laptops);
     }
+
 
 	public List<Laptop> getAllLaptops() {
 		return laptopRepository.findAll();
@@ -47,30 +67,40 @@ public class LaptopService implements ILaptopService {
 	    Optional<Laptop> theLaptop = laptopRepository.findById(id);
 	    if (theLaptop.isPresent()) {
 	        Laptop updatedLaptop = theLaptop.get();
-	        
+
+	        // Update basic fields
 	        updatedLaptop.setName(laptop.getName());
 	        updatedLaptop.setBrand(laptop.getBrand());
 	        updatedLaptop.setBasePrice(laptop.getBasePrice());
 	        updatedLaptop.setDescription(laptop.getDescription());
 	        updatedLaptop.setImageUrl(laptop.getImageUrl());
-	        updatedLaptop.setAvailableColours(laptop.getAvailableColours());
-	        
-	        // Static specs
 	        updatedLaptop.setProcessor(laptop.getProcessor());
 	        updatedLaptop.setGraphicsCard(laptop.getGraphicsCard());
 	        updatedLaptop.setBatteryLife(laptop.getBatteryLife());
 	        updatedLaptop.setOs(laptop.getOs());
 	        updatedLaptop.setDisplaySize(laptop.getDisplaySize());
 	        updatedLaptop.setDisplayDetails(laptop.getDisplayDetails());
-	        
-	        // Dynamic specs (e.g., RAM and ROM)
-	        updatedLaptop.setSpecs(laptop.getSpecs());
+
+	        // === Handle Available Colours ===
+	        updatedLaptop.getAvailableColours().clear();
+	        for (LaptopColor colour : laptop.getAvailableColours()) {
+	            colour.setLaptop(updatedLaptop); 
+	            updatedLaptop.getAvailableColours().add(colour);
+	        }
+
+	        // === Handle Specs ===
+	        updatedLaptop.getSpecs().clear();
+	        for (LaptopSpec spec : laptop.getSpecs()) {
+	            spec.setLaptop(updatedLaptop); 
+	            updatedLaptop.getSpecs().add(spec);
+	        }
 
 	        return laptopRepository.save(updatedLaptop);
 	    } else {
 	        throw new ChangeSetPersister.NotFoundException();
 	    }
 	}
+
 
 	@Override
 	public List<Laptop> featuredLaptops() {

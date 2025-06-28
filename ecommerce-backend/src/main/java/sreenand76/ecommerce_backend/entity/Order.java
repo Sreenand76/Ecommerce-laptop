@@ -1,33 +1,25 @@
 package sreenand76.ecommerce_backend.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "orders")
 public class Order {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
 
-    @Column(name = "user_email", nullable = false)
-    private String userEmail;
-
-    @Column(name = "laptop_id", nullable = false)
-    private String laptopId; 
-
-    private String color; 
-    private String ram; 
-    private String storage; 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(name = "order_date")
-    private LocalDate orderDate; 
+    private LocalDate orderDate;
 
-    private int quantity; 
-
-    @Column(name = "total_price")
-    private Long totalPrice; 
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<OrderItem> orderItems;
 
     private String status; 
 
@@ -52,60 +44,20 @@ public class Order {
         this.orderId = id;
     }
 
-    public String getUserEmail() {
-        return userEmail;
-    }
+    public User getUser() {
+		return user;
+	}
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    public String getLaptopId() {
-        return laptopId;
-    }
-
-    public void setLaptopId(String laptopId) {
-        this.laptopId = laptopId;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public String getRam() {
-        return ram;
-    }
-
-    public void setRam(String ram) {
-        this.ram = ram;
-    }
-
-    public String getStorage() {
-        return storage;
-    }
-
-    public void setStorage(String storage) {
-        this.storage = storage;
-    }
-
-    public LocalDate getOrderDate() {
+	public LocalDate getOrderDate() {
         return orderDate;
     }
 
     public void setOrderDate(LocalDate orderDate) {
         this.orderDate = orderDate;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public String getStatus() {
@@ -114,14 +66,6 @@ public class Order {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public Long getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(Long totalPrice) {
-        this.totalPrice = totalPrice;
     }
 
     public String getShippingAddress() {
@@ -138,21 +82,31 @@ public class Order {
     	this.phno=phno;
     }
 
-	public Order(Long orderId,String userEmail, String laptopId, String color, String ram, String storage, 
-			int quantity, Long totalPrice, String status, String shippingAddress, Long phno) {
-		this.orderId=orderId;
-		this.userEmail = userEmail;
-		this.laptopId = laptopId;
-		this.color = color;
-		this.ram = ram;
-		this.storage = storage;
-		this.quantity = quantity;
-		this.totalPrice = totalPrice;
+	public Long getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(Long orderId) {
+		this.orderId = orderId;
+	}
+
+	public List<OrderItem> getOrderItems() {
+		return orderItems;
+	}
+
+	public void setOrderItems(List<OrderItem> orderItems) {
+		this.orderItems = orderItems;
+	}
+
+	public Order(Long orderId, User user, LocalDate orderDate, List<OrderItem> orderItems, String status,
+			String shippingAddress, Long phno) {
+		super();
+		this.orderId = orderId;
+		this.user = user;
+		this.orderDate = orderDate;
+		this.orderItems = orderItems;
 		this.status = status;
 		this.shippingAddress = shippingAddress;
 		this.phno = phno;
-	}
-    
+	}    
 }
-
-

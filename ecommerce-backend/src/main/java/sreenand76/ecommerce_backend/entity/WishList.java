@@ -1,43 +1,53 @@
 package sreenand76.ecommerce_backend.entity;
 
-import java.util.Optional;
-
 import jakarta.persistence.*;
 
 @Entity
 public class WishList {
-	  @Id
-	  @GeneratedValue(strategy = GenerationType.IDENTITY)
-	  private Long id;
 
-	  @Column(name = "user_email", nullable = false)
-	  private String userEmail;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	    @Column(name = "laptop_id", nullable = false)
-	    private Long laptopId;
+    @Column(name = "user_email", nullable = false)
+    private String userEmail;
 
-		public Long getId() {
-			return id;
-		}
+    @ManyToOne
+    @JoinColumn(name = "laptop_id", nullable = false)
+    private Laptop laptop;
 
-		public void setId(Long id) {
-			this.id = id;
-		}
+    // Constructors
+    public WishList() {
+    }
 
-		public String getUserEmail() {
-			return userEmail;
-		}
+    public WishList(Long id, String userEmail, Laptop laptop) {
+        this.id = id;
+        this.userEmail = userEmail;
+        this.laptop = laptop;
+    }
 
-		public void setUserEmail(String userEmail) {
-			this.userEmail = userEmail;
-		}
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
 
-		public Long getLaptopId() {
-			return laptopId;
-		}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-		public void setLaptopId(Long laptopId) {
-			this.laptopId = laptopId;
-		}
-      
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public Laptop getLaptop() {
+        return laptop;
+    }
+
+    public void setLaptop(Laptop laptop) {
+        this.laptop = laptop;
+    }
 }

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { getLaptopById, getUserCartItems } from "../util/ApiFunctions";
-import { RemoveItemFromCart } from "../util/ApiFunctions";
-import { useAuth } from "./auth/AuthProvider";
+import { getLaptopById, getUserCartItems } from "../../util/ApiFunctions";
+import { RemoveItemFromCart } from "../../util/ApiFunctions";
+import "../../Loading.css";
+import { useAuth } from "../auth/AuthProvider";
 import { useNavigate } from "react-router-dom";
-import BackButton from "./ui/BackButton";
+import BackButton from "../ui/BackButton";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -20,13 +21,8 @@ const Cart = () => {
     const fetchCartItemsWithDetails = async () => {
       try {
         const cart = await getUserCartItems(userId);
-        const cartWithDetails = await Promise.all(
-          cart.map(async (item) => {
-            const laptopDetails  = await getLaptopById(item.laptopId);
-            return { ...item, ...laptopDetails }; // Merge cart item and laptop details
-          })
-        );
-        setCartItems(cartWithDetails);
+        console.log(cart)
+        setCartItems(cart);
       } catch (error) {
         console.error("Failed to fetch cart items:", error);
       } finally {
@@ -39,14 +35,13 @@ const Cart = () => {
   }, [userId]);
 
   const handleRemoveItem = async (item) => {
-    console.log(item)
     try {
-      await RemoveItemFromCart(userId, item.id, item);
+      await RemoveItemFromCart(userId,item.id);
       setCartItems((prevItems) =>
         prevItems.filter(
           (cartItem) =>
             !(
-              cartItem.laptopId === item.laptopId &&
+              cartItem.laptop.id === item.laptop.id &&
               cartItem.color === item.color &&
               cartItem.ram === item.ram &&
               cartItem.storage === item.storage &&
@@ -118,8 +113,8 @@ const Cart = () => {
                 className="flex flex-col md:flex-row items-center p-4 border border-gray-700 rounded-lg shadow-sm hover:shadow-md transition-shadow bg-gray-950"
               >
                 <img
-                  src={item.imageUrl}
-                  alt={`${item.name || `Laptop ${item.laptopId}`}`}
+                  src={item.laptop.imageUrl}
+                  alt={`${item.laptop.name}`}
                   className="w-full md:w-36 h-36 object-contain mb-4 sm:mb-0"
                 />
 
@@ -127,12 +122,12 @@ const Cart = () => {
                   {/* Product Details */}
                   <div className="col-span-2 md:col-span-2 ">
                     <h3 className="text-lg font-medium text-blue-400">
-                      {item.name || `Laptop ${item.laptopId}`}
+                      {item.laptop.name}
                     </h3>
-                    <p className="text-sm">Processor: {item.processor || "Unknown Processor"}</p>
-                    <p className="text-sm">Color: {item.color}</p>
-                    <p className="text-sm">RAM: {item.ram}</p>
-                    <p className="text-sm">Storage: {item.storage}</p>
+                    <p className="text-sm">Processor: {item.laptop.processor}</p>
+                    <p className="text-sm">Color: {item.selectedSpec.color}</p>
+                    <p className="text-sm">RAM: {item.selectedSpec.ram}</p>
+                    <p className="text-sm">Storage: {item.selectedSpec.storage}</p>
                     <p className="text-sm">Quantity: {item.quantity}</p>
                   </div>
 
@@ -144,7 +139,7 @@ const Cart = () => {
                   </div>
 
                   {/* Actions */}
-                  <div className="col-span-2  md:col-span-1 flex md:flex-col space-x-4 sm:space-x-0 sm:space-y-2 justify-center mt-4 sm:mt-0 md:px-10 gap-1">
+                  <div className="col-span-2 md:col-span-1 flex md:flex-col space-x-4 sm:space-x-0 sm:space-y-2 justify-center mt-4 sm:mt-0 md:px-10 gap-1">
                     <button
                       className="bg-red-800 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors text-sm"
                       onClick={() => handleRemoveItem(item)}
@@ -161,6 +156,7 @@ const Cart = () => {
                 </div>
               </div>
             ))}
+
           </div>
           {cartTotal > 0 &&
             <div className="mt-6 p-4 bg-gray-800 text-gray-200 rounded-lg text-center">

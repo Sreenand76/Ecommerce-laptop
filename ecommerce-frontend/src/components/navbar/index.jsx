@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import { FaBars, FaCog, FaSearch, FaSignInAlt, FaSignOutAlt, FaTimes, FaUser } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "./auth/AuthProvider";
-import { useLaptopContext } from "./context/LaptopContext";
+import { useAuth } from "../auth/AuthProvider";
+import { useLaptopContext } from "../context/LaptopContext";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-import { getUserCartItems } from "../util/ApiFunctions";
+import { getUserCartItems } from "../../util/ApiFunctions";
 
 const NavBar = () => {
   const { laptops } = useLaptopContext();
@@ -13,7 +13,7 @@ const NavBar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const dropdownRef = useRef(null); // Reference to the dropdown
-  
+
   const handleSearch = (query) => {
     setSearchQuery(query);
     if (query.trim() === "") {
@@ -66,7 +66,7 @@ const NavBar = () => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setSearchResults([]); // Close dropdown if clicked outside
-        
+
       }
     };
 
@@ -80,14 +80,14 @@ const NavBar = () => {
 
   return (
     <nav className="bg-gray-900 text-gray-300 shadow-lg sticky top-0 z-50 ">
-      <div className="mx-auto px-[3vw] py-4 flex items-center justify-between ">
+      <div className="mx-auto pl-[1.5vw] pr-[3vw] py-4 flex items-center justify-between ">
         {/* Logo */}
         <Link
-  to="/"
-  className="text-xl md:text-2xl font-extrabold bg-gradient-to-r from-blue-700 via-purple-900 to-pink-900 text-transparent bg-clip-text  lg:py-2"
->
-  PrismTech
-</Link>
+          to="/"
+          className="text-xl md:text-2xl lg:text-3xl font-extrabold bg-gradient-to-r from-blue-700 via-purple-900 to-pink-900 text-transparent bg-clip-text  lg:py-2"
+        >
+          GearGrid
+        </Link>
 
         {/* Navigation Links */}
         <div
@@ -232,7 +232,7 @@ const NavBar = () => {
 
           </div>
           <Link to="/cart" className="relative">
-            <ShoppingCartIcon className="h-5 w-5"/>            
+            <ShoppingCartIcon className="h-5 w-5" />
           </Link>
         </div>
 

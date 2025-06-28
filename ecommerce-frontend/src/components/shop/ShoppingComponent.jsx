@@ -2,19 +2,19 @@ import React, { useEffect, useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
-import { getAllBrands, getAllLaptops, laptop } from "../util/ApiFunctions";
-import "../Loading.css";
-import { useLaptopContext } from "./context/LaptopContext";
+import { getAllBrands, getAllLaptops, laptop } from "../../util/ApiFunctions";
+import "../../Loading.css";
+import { useLaptopContext } from "../context/LaptopContext";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
-import ConfirmationAddToCartModal from "./ui/ConfirmationAddToCartModal";
-import { useUserContext } from "./context/UserContext";
+import ConfirmationAddToCartModal from "../ui/ConfirmationAddToCartModal";
+import { useUserContext } from "../context/UserContext";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 const ShoppingComponent = () => {
   const { setLaptops, laptops,brands, setBrands } = useLaptopContext();
   const { handleWishlistToggle, handleAddToCart, wishlist} = useUserContext();
-  
+  console.log(wishlist)
   const [categoryOpen, setCategoryOpen] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);

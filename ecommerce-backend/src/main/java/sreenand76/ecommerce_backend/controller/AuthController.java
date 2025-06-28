@@ -38,11 +38,6 @@ public class AuthController {
         this.jwtUtils = jwtUtils;
     }
 
-    /**
-     * Registers a new user.
-     * @param user The user to be registered.
-     * @return A success message if registration is successful, or a conflict status if the user already exists.
-     */
     @PostMapping("/register-user")
     public ResponseEntity<?> registerUser(@RequestBody User user) {
         try {

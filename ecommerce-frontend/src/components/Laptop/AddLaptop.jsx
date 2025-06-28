@@ -75,11 +75,25 @@ const AddLaptop = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Ensure basePrice is a number when submitting
-      laptopDetails.basePrice = parseFloat(laptopDetails.basePrice);
-      console.log(laptopDetails)
-      await AddLaptopAdmin([laptopDetails]);
+      // Convert basePrice to float
+      const formattedLaptop = {
+        ...laptopDetails,
+        basePrice: parseFloat(laptopDetails.basePrice),
+        availableColours: laptopDetails.availableColours.map((color) => ({ color })),
+        specs: laptopDetails.specs.map((spec) => ({
+          ...spec,
+          priceAdjustment: parseFloat(spec.priceAdjustment || 0), // Ensure it's a number
+        })),
+      };
+  
+      console.log(formattedLaptop); // For debugging
+  
+      // Send it as a list (array of laptops)
+      await AddLaptopAdmin([formattedLaptop]);
+  
       toast.success("Laptop added successfully!");
+  
+      // Reset form
       setLaptopDetails({
         name: "",
         brand: "",
@@ -96,10 +110,11 @@ const AddLaptop = () => {
         specs: [],
       });
     } catch (err) {
+      console.error(err);
       toast.error("Failed to add laptop.");
     }
   };
-
+  
   return (
     <div className="container mx-auto p-2 max-w-4xl">
       <BackButton />

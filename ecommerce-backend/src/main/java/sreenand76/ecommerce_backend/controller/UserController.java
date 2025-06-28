@@ -7,11 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
-
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import sreenand76.ecommerce_backend.entity.CartItem;
-import sreenand76.ecommerce_backend.entity.Laptop;
 import sreenand76.ecommerce_backend.entity.Order;
 import sreenand76.ecommerce_backend.entity.User;
 import sreenand76.ecommerce_backend.entity.WishList;
@@ -19,13 +17,12 @@ import sreenand76.ecommerce_backend.service.IUserService;
 import java.util.List;
 import java.util.Optional;
 
-
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
     private final IUserService userService;
-
+    
     @Autowired
     public UserController(IUserService userService) {
         this.userService = userService;
@@ -95,15 +92,15 @@ public class UserController {
     }
     
     @Transactional
-    @DeleteMapping("/wishlist/remove/{userEmail}/{laptopId}")
-    public ResponseEntity<String> removeFromWishlist(@PathVariable String userEmail, @PathVariable Long laptopId) {
-        userService.removeFromWishlist(userEmail, laptopId);
+    @DeleteMapping("/wishlist/remove/{userEmail}/{wishlistId}")
+    public ResponseEntity<String> removeFromWishlist(@PathVariable String userEmail, @PathVariable Long wishlistId) {
+        userService.removeFromWishlist(userEmail, wishlistId);
         return ResponseEntity.ok("Item removed from wishlist");
     }
     
-    @PostMapping("cart/add/{email}/{laptopId}")
+    @PostMapping("/cart/add/{email}/{laptopId}")
     public ResponseEntity<CartItem> addtoUserCart(@PathVariable String email,@PathVariable Long laptopId,@RequestBody CartItem cartItem){
-    	CartItem savedItem=userService.addToCart(email,laptopId,cartItem);
+    	CartItem savedItem=userService.addToCart(email,laptopId,cartItem.getSelectedSpec(),cartItem.getQuantity());
     	return ResponseEntity.ok(savedItem);
     }
     
@@ -114,19 +111,15 @@ public class UserController {
     } 
     
     @Transactional
-    @DeleteMapping("/cart/remove/{email}/{laptopId}")
-    public ResponseEntity<String> deleteCartItem(@PathVariable String email,@PathVariable Long laptopId ,
-    		@RequestParam String color,
-            @RequestParam String ram,
-            @RequestParam String storage,
-            @RequestParam int quantity){
-    	userService.deleteCartItem(email,laptopId,color,ram,storage,quantity);
+    @DeleteMapping("/cart/remove/{email}/{Id}")
+    public ResponseEntity<String> deleteCartItem(@PathVariable Long Id){
+    	userService.deleteCartItem(Id);
     	return ResponseEntity.ok("Item removed from Cart");
     }
     
-    @PostMapping("add/order/{email}")
-    public ResponseEntity<Order> addNewOrder(@PathVariable String email,@RequestBody Order order){
-    	Order newOrder=userService.createNewOrder(email,order);
+    @PostMapping("add/order/{email}/{laptopId}")
+    public ResponseEntity<Order> addNewOrder(@PathVariable String email,@PathVariable Long laptopId,@RequestBody Order order){
+    	Order newOrder=userService.createNewOrder(email,laptopId,order);
     	return ResponseEntity.ok(newOrder);
     }
     

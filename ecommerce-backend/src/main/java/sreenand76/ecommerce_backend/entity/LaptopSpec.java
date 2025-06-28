@@ -1,20 +1,23 @@
 package sreenand76.ecommerce_backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-
 
 @Entity
 public class LaptopSpec {
-   
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String specType;  // e.g., RAM, ROM
-    private String specValue; // e.g., 8GB, 512GB
-    private double priceAdjustment; // Price adjustment for that spec (if any)
-	
     
+    @ManyToOne
+    @JoinColumn(name = "laptop_id", nullable = false)
+    @JsonBackReference 
+    private Laptop laptop;    
+    private String specType;  
+    private String specValue;
+          
+	private double priceAdjustment; 
+	    
     public Long getId() {
 		return id;
 	}
@@ -39,5 +42,20 @@ public class LaptopSpec {
 	public void setPriceAdjustment(double priceAdjustment) {
 		this.priceAdjustment = priceAdjustment;
 	}
-   
+	public Laptop getLaptop() {
+		return laptop;
+	}
+	public void setLaptop(Laptop laptop) {
+		this.laptop = laptop;
+	}
+	public LaptopSpec() {
+		super();
+	}
+	public LaptopSpec(Laptop laptop, String specType, String specValue, double priceAdjustment) {
+        this.laptop = laptop;
+        this.specType = specType;
+        this.specValue = specValue;
+        this.priceAdjustment = priceAdjustment;
+    }
+	
 }

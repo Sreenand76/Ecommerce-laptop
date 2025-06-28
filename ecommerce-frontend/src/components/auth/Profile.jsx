@@ -11,19 +11,27 @@ const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const { userDetails, setUserDetails } = useUserContext();
   const [loading, setIsLoading] = useState(true);
-  const [showDeleteModal, setShowDeleteModal] = useState(false); 
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const { state } = useAuth();
   const { user } = state;
- const navigate =useNavigate();
- const auth = useContext(AuthContext);
+  const navigate = useNavigate();
+  const auth = useContext(AuthContext);
+
   useEffect(() => {
-    fetchUserDetails();
-  }, [])
+    const storedDetails = localStorage.getItem("userDetails");
+    if (storedDetails) {
+      setUserDetails(JSON.parse(storedDetails));
+      setIsLoading(false);
+    } else {
+      fetchUserDetails();
+    }
+  }, []);
 
   const fetchUserDetails = async () => {
     try {
       const data = await getUserDetails(user.email);
       setUserDetails(data)
+      localStorage.setItem("userDetails", JSON.stringify(data));
     } catch (error) {
       console.error("Failed to fetch wishlist", error);
     }
@@ -48,6 +56,7 @@ const Profile = () => {
           theme: "dark",
         });
       await updateUserDetails(user.email, userDetails);
+      localStorage.setItem("userDetails", JSON.stringify(userDetails));
       toast.success("Profile updated successfully!",
         {
           position: "top-right",
@@ -65,11 +74,11 @@ const Profile = () => {
     try {
       const response = await deleteUser(userId);
       toast.success("Account deleted successfully...",
-      {
-        position: "top-right",
-        autoClose: 1000,
-        theme: "dark",
-      });
+        {
+          position: "top-right",
+          autoClose: 1000,
+          theme: "dark",
+        });
       setUserDetails(null); // Clear the UI     
       if (response === "User deleted successfully") {
         auth.handleLogout();
@@ -83,11 +92,11 @@ const Profile = () => {
 
   const handleConfirmDelete = () => {
     handleDeleteUser();
-    setShowDeleteModal(false); // Close the modal after confirmation
+    setShowDeleteModal(false); 
   };
 
   const handleCancelDelete = () => {
-    setShowDeleteModal(false); // Close the modal if user cancels
+    setShowDeleteModal(false);
   };
 
   if (loading) {
@@ -151,8 +160,8 @@ const Profile = () => {
                 onChange={handleChange}
                 className="w-full px-4 py-2 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-            ) : (             
-                <p className="text-base md:text-lg text-white break-words">{userDetails.email}</p>
+            ) : (
+              <p className="text-base md:text-lg text-white break-words">{userDetails.email}</p>
             )}
           </div>
 
@@ -197,7 +206,7 @@ const Profile = () => {
           </Link>
           <Link to="/cart" className="w-full">
             <button className="w-full bg-gray-800 hover:bg-gray-700 text-white py-3 px-6 rounded-md text-sm font-medium">
-              My Cart 
+              My Cart
             </button>
           </Link>
           <Link to="/wishlist" className="w-full">
@@ -205,7 +214,6 @@ const Profile = () => {
               My Wishlist
             </button>
           </Link>
-
         </div>
 
         {/* Save/Cancel Section */}
@@ -244,29 +252,29 @@ const Profile = () => {
             Delete Account
           </button>
         </div>
-         {/* Confirmation Modal */}
-      {showDeleteModal && (
-        <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50 p-5">
-          <div className="bg-gray-900 p-6 rounded-lg shadow-lg max-w-sm w-full text-center">
-            <h4 className="text-xl font-semibold text-gray-200 mb-4">Are you sure you want to delete your account?</h4>
-            <div className="flex justify-between">
-            <button
-                className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600"
-                onClick={handleCancelDelete}
-              >
-                Cancel
-              </button>
-              <button
-                className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
-                onClick={handleConfirmDelete}
-              >
-                Confirm
-              </button>
-              
+        {/* Confirmation Modal */}
+        {showDeleteModal && (
+          <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50 p-5">
+            <div className="bg-gray-900 p-6 rounded-lg shadow-lg max-w-sm w-full text-center">
+              <h4 className="text-xl font-semibold text-gray-200 mb-4">Are you sure you want to delete your account?</h4>
+              <div className="flex justify-between">
+                <button
+                  className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600"
+                  onClick={handleCancelDelete}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+                  onClick={handleConfirmDelete}
+                >
+                  Confirm
+                </button>
+
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
       </div>
     </div>
   );

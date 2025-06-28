@@ -19,7 +19,6 @@ public class User {
     private String name;
     private String address;
     private String phone;
-
         
     @ManyToMany(fetch = FetchType.EAGER,
             cascade = {CascadeType.PERSIST,
