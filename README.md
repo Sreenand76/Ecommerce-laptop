@@ -131,7 +131,6 @@ Key features include dynamic pricing, advanced filtering, and a seamless, respon
 ### 1. Clone the Repository
 ```bash
 git clone https://github.com/Sreenand76/Ecommerce-laptop.git
-cd GearGrid
 ```
 
 ### 2. Setup the Frontend
