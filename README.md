@@ -130,20 +130,20 @@ Key features include dynamic pricing, advanced filtering, and a seamless, respon
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/GearGrid.git
+git clone https://github.com/Sreenand76/Ecommerce-laptop.git
 cd GearGrid
 ```
 
 ### 2. Setup the Frontend
 ```bash
-cd GearGrid-frontend
+cd ecommerce-frontend
 npm install
 npm run dev
 ```
 
 ### 3. Setup the Backend
 ```bash
-cd GearGrid-Backend
+cd ecommerce-backend
 mvn clean install
 mvn spring-boot:run
 ```
