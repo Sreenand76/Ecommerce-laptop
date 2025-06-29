@@ -100,18 +100,20 @@ Key features include dynamic pricing, advanced filtering, and a seamless, respon
     <td align="center"><strong>Shopping Page</strong></td>
   </tr>
   <tr>
-    <td><img src="ecommerce-frontend/screenshot/geargrid-home.png" width="300"/></td>
-    <td><img src="ecommerce-frontend/screenshot/geargrid-shop.png" width="300"/></td>
+    <td><img src="ecommerce-frontend/screenshot/geargrid-home.png" width="500"/></td>
+    <td><img src="ecommerce-frontend/screenshot/geargrid-shop.png" width="500"/></td>
   </tr>
   <tr>
     <td align="center"><strong>Laptop Details</strong></td>
     <td align="center"><strong>Orders Page</strong></td>
   </tr>
   <tr>
-    <td><img src="ecommerce-frontend/screenshot/geargrid-laptop.png" width="300"/></td>
-    <td><img src="ecommerce-frontend/screenshot/geargrid-orders.png" width="300"/></td>
+    <td><img src="ecommerce-frontend/screenshot/geargrid-laptop.png" width="500"/></td>
+    <td><img src="ecommerce-frontend/screenshot/geargrid-orders.png" width="500"/></td>
   </tr>
 </table>
+
+
 ---
 
 ## 💡 Key Learnings & Challenges
