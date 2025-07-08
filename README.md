@@ -6,7 +6,7 @@
 
 ## 🚀 Live Demo
 
-[Try GearGrid Live!]([https://geargrid-demo.vercel.app/](https://geargrid-gaming-laptops.vercel.app/)) 
+[Try GearGrid Live!](https://geargrid-gaming-laptops.vercel.app/)
 
 ---
 
