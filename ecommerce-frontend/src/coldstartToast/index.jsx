@@ -1,31 +1,64 @@
-import { useEffect, useState } from "react";
-import './ColdStartToastDark.css';
+import { useEffect, useState, useRef } from "react";
+import './ColdStartToast.css';
 
 const ColdStartToast = () => {
-  const [isVisible, setIsVisible] = useState(true);
+  const [showToast, setShowToast] = useState(false);
   const [isError, setIsError] = useState(false);
+  const timeoutRef = useRef(null);
+  const DELAY_THRESHOLD = 1000; // 1 second threshold
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/keep-alive`)
-      .then(() => setIsVisible(false))
-      .catch(() => {
-        setMessage("Backend is taking too long. Please refresh.");
-        setIsError(true);
-        setTimeout(() => setIsVisible(false), 5000);
-      });
-  }, []);
+    // Set timeout to show toast only if server is slow
+    timeoutRef.current = setTimeout(() => {
+      setShowToast(true);
+    }, DELAY_THRESHOLD);
 
-  if (!isVisible) return null;
+    const controller = new AbortController();
+    
+    fetch(`${import.meta.env.VITE_API_URL}/keep-alive`, { 
+      signal: controller.signal 
+    })
+      .then(response => {
+        clearTimeout(timeoutRef.current);
+        if (!response.ok) throw new Error("Server not ready");
+        
+        // Only animate out if toast was shown
+        if (showToast) {
+          setTimeout(() => setShowToast(false), 300); // Smooth exit
+        }
+      })
+      .catch(err => {
+        if (err.name !== 'AbortError') {
+          clearTimeout(timeoutRef.current);
+          setShowToast(true);
+          setIsError(true);
+          setTimeout(() => setShowToast(false), 5000); // Show error for 5s
+        }
+      });
+
+    return () => {
+      clearTimeout(timeoutRef.current);
+      controller.abort(); // Cleanup fetch on unmount
+    };
+  }, [showToast]);
+
+  if (!showToast) return null;
 
   return (
     <div className={`custom-toast ${isError ? 'error' : ''}`}>
       <div className="toast-content">
         {!isError && <span className="spinner" />}
         <span className="toast-message">
-          Waking up server...<span className="mobile-hide"> may take up to 1–2 mins </span>(Render free tier)
+          {isError 
+            ? "Backend is taking too long. Please refresh."
+            : "Waking up server..."}
         </span>
       </div>
-      <button className="close-button" onClick={() => setIsVisible(false)}>
+      <button 
+        className="close-button" 
+        onClick={() => setShowToast(false)}
+        aria-label="Close notification"
+      >
         &times;
       </button>
     </div>
