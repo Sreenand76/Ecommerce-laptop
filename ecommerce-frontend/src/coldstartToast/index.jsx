@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import './ColdStartToast.css';
+import './ColdStartToastDark.css';
 
 const ColdStartToast = () => {
   const [showToast, setShowToast] = useState(false);
