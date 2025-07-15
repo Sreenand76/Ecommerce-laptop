@@ -9,7 +9,7 @@ const ColdStartToast = () => {
     toast.info(
       <div className="cold-toast-dark-content">
         <span className="spinner-dark" />
-        Waking up backend... (Render free tier)
+        Waking up server... may take up to 1–2 mins (Render free tier)
       </div>,
       {
         toastId,
