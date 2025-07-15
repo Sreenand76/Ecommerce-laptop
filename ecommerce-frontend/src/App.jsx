@@ -27,6 +27,7 @@ import ManageUsers from './components/admin/ManageUsers';
 import AddLaptop from './components/Laptop/AddLaptop';
 import { Elements } from '@stripe/react-stripe-js';
 import stripePromise from './stripe';
+import ColdStartToast from './coldstartToast';
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
       <AuthProvider>
       <Elements stripe={stripePromise}>
         <BrowserRouter>
+        <ColdStartToast/>
           <ToastContainer />
           <UserProvider>
             <LaptopProvider>
