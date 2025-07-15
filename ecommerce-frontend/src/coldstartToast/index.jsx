@@ -1,39 +1,35 @@
-import { useEffect } from "react";
-import { toast } from "react-toastify";
-import './ColdStartToastDark.css';
+import { useEffect, useState } from "react";
+import './ColdStartToast.css';
 
 const ColdStartToast = () => {
+  const [isVisible, setIsVisible] = useState(true);
+  const [isError, setIsError] = useState(false);
+
   useEffect(() => {
-    const toastId = "coldStartDark";
-
-    toast.info(
-      <div className="cold-toast-dark-content">
-        <span className="spinner-dark" />
-        Waking up server... may take up to 1–2 mins (Render free tier)
-      </div>,
-      {
-        toastId,
-        position: "top-center",
-        autoClose: false,
-        closeOnClick: false,
-        draggable: false,
-        theme: "dark", 
-        toastClassName: "cold-toast-dark",
-      }
-    );
-
     fetch(`${import.meta.env.VITE_API_URL}/keep-alive`)
-      .then(() => toast.dismiss(toastId))
+      .then(() => setIsVisible(true))
       .catch(() => {
-        toast.update(toastId, {
-          render: "Backend is taking too long. Please refresh.",
-          type: "error",
-          autoClose: 5000,
-        });
+        setMessage("Backend is taking too long. Please refresh.");
+        setIsError(true);
+        setTimeout(() => setIsVisible(false), 5000);
       });
   }, []);
 
-  return null;
+  if (!isVisible) return null;
+
+  return (
+    <div className={`custom-toast ${isError ? 'error' : ''}`}>
+      <div className="toast-content">
+        {!isError && <span className="spinner" />}
+        <span className="toast-message">
+          Waking up server...<span className="mobile-hide"> may take up to 1–2 mins </span>(Render free tier)
+        </span>
+      </div>
+      <button className="close-button" onClick={() => setIsVisible(false)}>
+        &times;
+      </button>
+    </div>
+  );
 };
 
 export default ColdStartToast;
