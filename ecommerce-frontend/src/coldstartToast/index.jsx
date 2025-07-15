@@ -7,7 +7,7 @@ const ColdStartToast = () => {
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/keep-alive`)
-      .then(() => setIsVisible(true))
+      .then(() => setIsVisible(false))
       .catch(() => {
         setMessage("Backend is taking too long. Please refresh.");
         setIsError(true);
