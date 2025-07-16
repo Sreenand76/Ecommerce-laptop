@@ -51,7 +51,7 @@ const ColdStartToast = () => {
         <span className="toast-message">
           {isError 
             ? "Backend is taking too long. Please refresh."
-            : "Waking up server..."}
+            : "Waking up server... may take up to 1–2 mins (Render free tier)"}
         </span>
       </div>
       <button 
