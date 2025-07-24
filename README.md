@@ -6,7 +6,7 @@
 
 ## 🚀 Live Demo
 
-[Try GearGrid Live!](https://geargrid-demo.vercel.app/) 
+[Try GearGrid Live!](https://geargrid-gaming-laptops.vercel.app/) 
 
 ---
 
@@ -96,11 +96,11 @@ Key features include dynamic pricing, advanced filtering, and a seamless, respon
 
 | Home Page                              | Shopping page                           |
 |------------------------------------------|------------------------------------------|
-| ![Home](ecommerce-frontend\screenshot\geargrid-home.png) | ![Shopping](ecommerce-frontend\screenshot\geargrid-shop.png) |
+| ![Home](ecommerce-frontend/screenshot/geargrid-home.png) | ![Shopping](ecommerce-frontend/screenshot/geargrid-shop.png) |
 
 | Laptop Details                         | Orders Page                         |
 |------------------------------------------|------------------------------------------|
-| ![Laptop](ecommerce-frontend\screenshot\geargrid-laptop.png) | ![Order](ecommerce-frontend\screenshot\geargrid-orders.png) |
+| ![Laptop](ecommerce-frontend/screenshot/geargrid-laptop.png) | ![Order](ecommerce-frontend/screenshot/geargrid-orders.png) |
 
 ---
 
